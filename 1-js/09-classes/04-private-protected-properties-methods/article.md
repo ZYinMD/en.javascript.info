@@ -116,7 +116,7 @@ class CoffeeMachine {
 let coffeeMachine = new CoffeeMachine(100);
 
 // add water
-coffeeMachine.waterAmount = -10; // Error: Negative water
+coffeeMachine.waterAmount = -10; // _waterAmount will be set to 0 instead of -10
 ```
 
 Now the access is under control, so setting the water amount below zero becomes impossible.
