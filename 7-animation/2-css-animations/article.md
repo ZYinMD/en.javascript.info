@@ -34,8 +34,8 @@ Click the button below to animate the background:
 </style>
 
 <script>
-  color.onclick = function() {
-    this.style.backgroundColor = 'red';
+  color.onclick = function () {
+    this.style.backgroundColor = "red";
   };
 </script>
 ```
@@ -55,18 +55,18 @@ For instance, this button animates both `color` and `font-size`:
 <button id="growing">Click me</button>
 
 <style>
-#growing {
-*!*
-  transition: font-size 3s, color 2s;
-*/!*
-}
+  #growing {
+  *!*
+    transition: font-size 3s, color 2s;
+  */!*
+  }
 </style>
 
 <script>
-growing.onclick = function() {
-  this.style.fontSize = '36px';
-  this.style.color = 'red';
-};
+  growing.onclick = function () {
+    this.style.fontSize = "36px";
+    this.style.color = "red";
+  };
 </script>
 ```
 
@@ -84,9 +84,9 @@ In `transition-duration` we can specify how long the animation should take. The 
 
 ## transition-delay
 
-In `transition-delay` we can specify the delay *before* the animation. For instance, if `transition-delay` is `1s` and `transition-duration` is `2s`, then the animation starts 1 second after the property change and the total duration will be 2 seconds.
+In `transition-delay` we can specify the delay _before_ the animation. For instance, if `transition-delay` is `1s` and `transition-duration` is `2s`, then the animation starts 1 second after the property change and the total duration will be 2 seconds.
 
-Negative values are also possible. Then the animation is shown immediately, but the starting point of the animation will be after given value (time). For example, if `transition-delay` is `-1s` and `transition-duration` is `2s`, then animation starts from the halfway point and total duration will be 1 second. 
+Negative values are also possible. Then the animation is shown immediately, but the starting point of the animation will be after given value (time). For example, if `transition-delay` is `-1s` and `transition-duration` is `2s`, then animation starts from the halfway point and total duration will be 1 second.
 
 Here the animation shifts numbers from `0` to `9` using CSS `translate` property:
 
@@ -105,7 +105,7 @@ The `transform` property is animated like this:
 In the example above JavaScript adds the class `.animate` to the element -- and the animation starts:
 
 ```js
-stripe.classList.add('animate');
+stripe.classList.add("animate");
 ```
 
 We could also start it from somewhere in the middle of the transition, from an exact number, e.g. corresponding to the current second, using a negative `transition-delay`.
@@ -187,10 +187,11 @@ Here's the timing function in action (click the train):
 [codetabs src="train"]
 
 CSS:
+
 ```css
 .train {
   left: 0;
-  transition: left 5s cubic-bezier(0, .5, .5, 1);
+  transition: left 5s cubic-bezier(0, 0.5, 0.5, 1);
   /* JavaScript sets left to 450px */
 }
 ```
@@ -201,15 +202,14 @@ The `linear` is a shorthand for `cubic-bezier(0, 0, 1, 1)` -- a straight line, w
 
 Other names are shorthands for the following `cubic-bezier`:
 
-| <code>ease</code><sup>*</sup> | <code>ease-in</code> | <code>ease-out</code> | <code>ease-in-out</code> |
-|-------------------------------|----------------------|-----------------------|--------------------------|
-| <code>(0.25, 0.1, 0.25, 1.0)</code> | <code>(0.42, 0, 1.0, 1.0)</code> | <code>(0, 0, 0.58, 1.0)</code> | <code>(0.42, 0, 0.58, 1.0)</code> |
-| ![ease, figure](ease.svg) | ![ease-in, figure](ease-in.svg) | ![ease-out, figure](ease-out.svg) | ![ease-in-out, figure](ease-in-out.svg) |
+| <code>ease</code><sup>\*</sup>      | <code>ease-in</code>             | <code>ease-out</code>             | <code>ease-in-out</code>                |
+| ----------------------------------- | -------------------------------- | --------------------------------- | --------------------------------------- |
+| <code>(0.25, 0.1, 0.25, 1.0)</code> | <code>(0.42, 0, 1.0, 1.0)</code> | <code>(0, 0, 0.58, 1.0)</code>    | <code>(0.42, 0, 0.58, 1.0)</code>       |
+| ![ease, figure](ease.svg)           | ![ease-in, figure](ease-in.svg)  | ![ease-out, figure](ease-out.svg) | ![ease-in-out, figure](ease-in-out.svg) |
 
 `*` -- by default, if there's no timing function, `ease` is used.
 
 So we could use `ease-out` for our slowing down train:
-
 
 ```css
 .train {
@@ -226,10 +226,11 @@ But it looks a bit differently.
 The control points on the curve can have any `y` coordinates: even negative or huge ones. Then the Bezier curve would also extend very low or high, making the animation go beyond its normal range.
 
 In the example below the animation code is:
+
 ```css
 .train {
   left: 100px;
-  transition: left 5s cubic-bezier(.5, -1, .5, 2);
+  transition: left 5s cubic-bezier(0.5, -1, 0.5, 2);
   /* JavaScript sets left to 400px */
 }
 ```
@@ -238,7 +239,7 @@ The property `left` should animate from `100px` to `400px`.
 
 But if you click the train, you'll see that:
 
-- First, the train goes *back*: `left` becomes less than `100px`.
+- First, the train goes _back_: `left` becomes less than `100px`.
 - Then it goes forward, a little bit farther than `400px`.
 - And then back again -- to `400px`.
 
@@ -271,9 +272,9 @@ We'll make the digits appear in a discrete way by making the part of the list ou
 There will be 9 steps, a step-move for each digit:
 
 ```css
-#stripe.animate  {
+#stripe.animate {
   transform: translate(-90%);
-  transition: transform 9s *!*steps(9, start)*/!*;
+  transition: transform 9s * ! * steps(9, start) * / ! *;
 }
 ```
 
@@ -331,26 +332,25 @@ For instance, the ship in the example below starts to sail there and back when c
 The animation is initiated by the function `go` that re-runs each time the transition finishes, and flips the direction:
 
 ```js
-boat.onclick = function() {
+boat.onclick = function () {
   //...
   let times = 1;
 
   function go() {
     if (times % 2) {
       // sail to the right
-      boat.classList.remove('back');
-      boat.style.marginLeft = 100 * times + 200 + 'px';
+      boat.classList.remove("back");
+      boat.style.marginLeft = 100 * times + 200 + "px";
     } else {
       // sail to the left
-      boat.classList.add('back');
-      boat.style.marginLeft = 100 * times - 200 + 'px';
+      boat.classList.add("back");
+      boat.style.marginLeft = 100 * times - 200 + "px";
     }
-
   }
 
   go();
 
-  boat.addEventListener('transitionend', function() {
+  boat.addEventListener("transitionend", function () {
     times++;
     go();
   });
@@ -377,35 +377,82 @@ Here's an example with explanations:
 <div class="progress"></div>
 
 <style>
-*!*
-  @keyframes go-left-right {        /* give it a name: "go-left-right" */
-    from { left: 0px; }             /* animate from left: 0px */
-    to { left: calc(100% - 50px); } /* animate to left: 100%-50px */
-  }
-*/!*
+  *!*
+    @keyframes go-left-right {        /* give it a name: "go-left-right" */
+      from { left: 0px; }             /* animate from left: 0px */
+      to { left: calc(100% - 50px); } /* animate to left: 100%-50px */
+    }
+  */!*
 
-  .progress {
-*!*
-    animation: go-left-right 3s infinite alternate;
-    /* apply the animation "go-left-right" to the element
-       duration 3 seconds
-       number of times: infinite
-       alternate direction every time
-    */
-*/!*
+    .progress {
+  *!*
+      animation: go-left-right 3s infinite alternate;
+      /* apply the animation "go-left-right" to the element
+         duration 3 seconds
+         number of times: infinite
+         alternate direction every time
+      */
+  */!*
 
-    position: relative;
-    border: 2px solid green;
-    width: 50px;
-    height: 20px;
-    background: lime;
-  }
+      position: relative;
+      border: 2px solid green;
+      width: 50px;
+      height: 20px;
+      background: lime;
+    }
 </style>
 ```
 
 There are many articles about `@keyframes` and a [detailed specification](https://drafts.csswg.org/css-animations/).
 
 You probably won't need `@keyframes` often, unless everything is in constant motion on your sites.
+
+## Performance of CSS animations
+
+Most CSS properties can be animated, because they are numeric values. For instance, `width`, `font-size`, and `color` are all numbers. When you animate them, the browser gradually alter these numbers frame by frame, creating a smooth effect.
+
+However, not all animations will look as smooth as you'd like, because different CSS properties cost differently to animate. In real world projects, you should try to only use `transform` and `opacity` to achieve your desired effects, because these two are the cheapest to animate, and produce the highest framerate.
+
+The reason for this is when an element is being _transformed_, the browser engine is able to only worry about changing the look of this one thing, without touching other things that have already rendered. The same for opacity change.
+
+If you're interested in more technical details, when there's a style change, the browser goes through 3 sequential steps to render the new page:
+
+1. **layout**: re-compute the geometry and position of each element, then
+2. **Paint**: re-compute how everything should look like, including "layers" which is a big deal, then
+3. **Composite**: render the results into pixels on screen.
+
+During CSS animation, this process repeats every frame. You can check [how each CSS change triggers these steps](https://csstriggers.com/), and you'll find most changes will trigger ` 1` `2` `3`, while color change only triggers `2` `3`, and transform and opacity only trigger `3`.
+
+Luckily, `transform` is by far the most useful and most powerful property to animate. By using `transform` on an element, you could rotate and flip it, stretch and shrink it, move it around, and [many more](https://developer.mozilla.org/docs/Web/CSS/transform).
+
+Meanwhile, `opacity` can help with show / hide and fade-in / fade-out effects. By paring `transform` with `opacity` you can usually solve all your needs, for example:
+
+```html run height=80 autorun no-beautify
+<h1 onclick="this.classList.toggle('animated')">click me to start / stop</h1>
+
+<style>
+  h1.animated {
+    animation: hello-goodbye 1.8s infinite;
+    width: fit-content;
+  }
+  @keyframes hello-goodbye {
+    0% {
+      transform: translateY(-60px) rotateX(0.7turn);
+      opacity: 0;
+    }
+    50% {
+      transform: translate(0);
+      opacity: 100;
+    }
+    100% {
+      transform: translateX(230px) rotateZ(90deg) scale(0.5);
+      opacity: 0;
+    }
+  }
+</style>
+```
+
+In earlier examples in this chapter, we've used animations on `font-size`, `left`, `width`, `height`, etc. In real life projects, they could be replaced by `transform: scale()` and `transform: translate()` for better performance. More on this topic [here](https://web.dev/animations-overview/) and [here](https://web.dev/animations-guide/).
 
 ## Summary
 
